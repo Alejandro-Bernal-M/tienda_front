@@ -1,0 +1,117 @@
+.productContainer {
+  background-color: var(--background);
+  border: 1px solid var(--background-2);
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  width: 300px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.productTitle {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.productImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.imageNavButtons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px; 
+  height: 20px;
+}
+
+.imageNavButtons button {
+  background-color: var(--primary-color);
+  color: var(--background-2);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.6rem;
+  flex: 1;
+  margin: 0 4px;
+  text-align: center;
+}
+
+.imageNavButtons button:hover {
+  background-color: var(--secondary-color);
+}
+
+.productDescription {
+  font-size: 0.875rem;
+  color: var(--font-color-1); 
+  margin-bottom: 8px;
+  line-height: 1.4;
+  text-align: center;
+  max-height: 100px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.productPrice {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--details-1);
+  margin-bottom: 4px;
+  text-align: center;
+}
+
+.productOffer {
+  color: var(--secondary-color);
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.productQuantity {
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.productQuantity span {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.productQuantity input {
+  width: 80px;
+  padding: 4px;
+  border-radius: 4px;
+  border: 1px solid var(--background-2);
+  text-align: center;
+}
+
+.productButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.productButtons button {
+  background-color: var(--primary-color);
+  color: var(--background-2);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.productButtons button:hover {
+  background-color: var(--secondary-color);
+}

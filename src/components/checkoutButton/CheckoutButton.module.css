@@ -1,0 +1,14 @@
+.checkoutButton {
+  background-color: var(--secondary-color);
+  border: none;
+  margin-top: 10px;
+  padding: 10px 20px;
+  color: var(--font-color-2);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.checkoutButton:hover {
+  background-color: var(--primary-color);
+}

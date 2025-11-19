@@ -1,0 +1,87 @@
+/* homepage.module.css */
+
+/* Container for the homepage */
+.container {
+  background-color: var(--background);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Main title */
+.title {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Each section's container */
+.section {
+  background-color: var(--background-3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Title inside each section */
+.sectionTitle {
+  font-size: 1.75rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+/* Image inside each section */
+.sectionImage {
+  border-radius: 5px;
+  margin-bottom: 15px;
+  max-width: 100%; /* Ensure image responsiveness */
+}
+
+/* Paragraphs inside each section */
+.sectionParagraph {
+  font-size: 1rem;
+  color: var(--font-color-1);
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+/* Button style (button_style_1) for the homepage */
+.button_style_1 {
+  background-color: var(--primary-color);
+  color: var(--font-color-2);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.button_style_1:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .section {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+}
