@@ -1,0 +1,29 @@
+{
+  "Navbar": {
+    "home": "Inicio",
+    "shop": "Colección",
+    "about": "Filosofía",
+    "cart": "Carrito",
+    "freeShipping": "Envíos gratis en órdenes superiores a COP 300.000"
+  },
+  "Home": {
+    "hero": {
+      "subtitle": "Naturaleza y Equilibrio",
+      "title": "MOKAZE",
+      "description": "Equipamiento diseñado para conectar con el bosque y fluir con el viento.",
+      "cta": "Explorar Colección",
+      "alt": "Aventura Mokaze en el bosque"
+    },
+    "sections": {
+      "chapter": "Capítulo",
+      "readMore": "Leer más",
+      "defaultAlt": "Sección Mokaze"
+    },
+    "newsletter": {
+      "title": "Únete al camino del viento.",
+      "description": "Suscríbete para recibir novedades exclusivas y guías de aventura.",
+      "placeholder": "Tu correo electrónico",
+      "button": "Unirse"
+    }
+  }
+}

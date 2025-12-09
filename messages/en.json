@@ -1,0 +1,29 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "shop": "Collection",
+    "about": "Philosophy",
+    "cart": "Cart",
+    "freeShipping": "Free shipping for orders over $75"
+  },
+  "Home": {
+    "hero": {
+      "subtitle": "Nature & Balance",
+      "title": "MOKAZE",
+      "description": "Gear designed to connect with the forest and flow with the wind.",
+      "cta": "Explore Collection",
+      "alt": "Mokaze forest adventure"
+    },
+    "sections": {
+      "chapter": "Chapter",
+      "readMore": "Read more",
+      "defaultAlt": "Mokaze Section"
+    },
+    "newsletter": {
+      "title": "Join the path of the wind.",
+      "description": "Subscribe to receive exclusive news and adventure guides.",
+      "placeholder": "Your email address",
+      "button": "Join"
+    }
+  }
+}
