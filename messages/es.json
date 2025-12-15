@@ -84,6 +84,45 @@
         "action": "Acción"
       },
       "empty": "No hay órdenes recientes."
+    },
+    "categories": {
+      "title": "Gestión de Categorías",
+      "createBtn": "Nueva Categoría",
+      "headers": {
+        "image": "Imagen",
+        "name": "Nombre",
+        "parent": "Categoría Padre",
+        "actions": "Acciones"
+      },
+      "loading": "Cargando categorías...",
+      "empty": "No hay categorías registradas.",
+      "childLabel": "Subcategoría",
+      "confirmDelete": "¿Estás seguro de eliminar esta categoría?"
+    },
+    "createCategory": {
+      "title": "Nueva Categoría",
+      "nameLabel": "Nombre de la categoría",
+      "imageLabel": "Imagen de portada",
+      "uploadText": "Clic para subir imagen",
+      "parentLabel": "Categoría Padre (Opcional)",
+      "noneOption": "Ninguna (Raíz)",
+      "submit": "Crear Categoría",
+      "loading": "Creando...",
+      "success": "Categoría creada con éxito",
+      "cancel": "Cancelar",
+      "errorImageRequired": "La imagen es obligatoria."
+    },
+    "editCategory": {
+      "title": "Editar Categoría",
+      "nameLabel": "Nombre",
+      "currentImage": "Imagen Actual",
+      "changeImage": "Cambiar Imagen",
+      "uploadText": "Clic para subir nueva",
+      "parentLabel": "Categoría Padre",
+      "noneOption": "Ninguna (Raíz)",
+      "submit": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "errorImageRequired": "La imagen es obligatoria."
     }
   }
 }

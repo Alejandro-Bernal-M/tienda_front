@@ -9,6 +9,7 @@ const initialState = {
   error: null as any,
 };
 
+// --- GET ---
 const getCategories = createAsyncThunk(
   "categories/getCategories",
   async () => {
@@ -17,6 +18,7 @@ const getCategories = createAsyncThunk(
   }
 );
 
+// --- CREATE ---
 const createCategory = createAsyncThunk(
   "categories/createCategory",
   async (data: any, { dispatch }) => {
@@ -25,56 +27,64 @@ const createCategory = createAsyncThunk(
     try {
       const response: any = await fetch(apiEndPoints.createCategory, {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
+        headers: { "Authorization": `Bearer ${token}` },
         body: category,
       });
-      if (response.status == 400) {
-        console.log('Please sign in to create a category')
+      if (response.status === 400) {
         dispatch(signOut());
         window.location.href = '/';
-        return
+        return;
       }
-      return response.json();
+      const result = await response.json();
+      
+      // Refetch para asegurar orden correcto
+      dispatch(getCategories());
+      
+      return result;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 );
 
+// --- UPDATE (SOLUCIÓN REFETCH) ---
 const updateCategory = createAsyncThunk(
   "categories/updateCategory",
   async (data: any, { dispatch }) => {
     const category = data.category;
     const token = data.token;
-    console.log('category', category)
+    
     try {
-      const response: any = await fetch(apiEndPoints.updateCategory(category.get('_id')), {
+      const categoryId = category.get('_id'); 
+      const response: any = await fetch(apiEndPoints.updateCategory(categoryId), {
         method: "PUT",
-        headers: {
-          "Authorization": `Bearer ${token}`
-        },
+        headers: { "Authorization": `Bearer ${token}` },
         body: category,
       });
+
       if (response.status === 401) {
         dispatch(signOut());
-        window.location.href = '/session ';
-        alert('Session expired, please sign in');
-        return
+        window.location.href = '/session';
+        return;
       }
+      if (response.status === 400) throw new Error('Error updating category');
+      
+      const result = await response.json();
 
-      if (response.status === 400) {
-        alert('Error updating category');
-        return
-      }
-      return response.json();
+      // 🔥 FORZAMOS RECARGA DE DATOS 🔥
+      // Esto garantiza que la estructura padre/hijo sea idéntica a la DB.
+      await dispatch(getCategories());
+
+      return result;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 );
 
+// --- DELETE ---
 const deleteCategory = createAsyncThunk(
   "categories/deleteCategory",
   async (data: any, { dispatch }) => {
@@ -83,24 +93,26 @@ const deleteCategory = createAsyncThunk(
     try {
       const response: any = await fetch(apiEndPoints.deleteCategory(categoryId), {
         method: "DELETE",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        }
+        headers: { "Authorization": `Bearer ${token}` }
       });
-      if (response.status == 400) {
-        alert('Error deleting category');
-        return
-      }
-
-      if (response.status == 401) {
+      if (response.status === 400) throw new Error('Error deleting');
+      if (response.status === 401) {
         dispatch(signOut());
         window.location.href = '/';
-        return
+        return;
       }
-
-      return response.json();
+      
+      const result = await response.json();
+      
+      // Si el backend no devuelve la lista completa actualizada, hacemos refetch
+      if (!result.updatedCategories) {
+          dispatch(getCategories());
+      }
+      
+      return result;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 );
@@ -114,60 +126,47 @@ const categoriesSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getCategories.pending, (state) => {
-      state.loading = true;
-    });
+    // GET
+    builder.addCase(getCategories.pending, (state) => { state.loading = true; });
     builder.addCase(getCategories.fulfilled, (state, action) => {
       state.loading = false;
-      state.categories = action.payload.categoryList;
+      state.categories = action.payload.categoryList || action.payload; // Ajusta según tu respuesta backend
     });
     builder.addCase(getCategories.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
     });
-    builder.addCase(createCategory.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(createCategory.fulfilled, (state, action) => {
+
+    // CREATE
+    builder.addCase(createCategory.pending, (state) => { state.loading = true; });
+    builder.addCase(createCategory.fulfilled, (state) => {
       state.loading = false;
-      state.categories.push(action.payload.savedCategory);
+      // No hacemos push manual, esperamos al refetch de getCategories
     });
     builder.addCase(createCategory.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
     });
-    builder.addCase(updateCategory.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(updateCategory.fulfilled, (state, action) => {
-      state.loading = false;
-      if(action.payload.updatedCategory.parentId) {
-        const parentIndex = state.categories.findIndex((category) => category._id == action.payload.updatedCategory.parentId);
-        const childIndex = state.categories[parentIndex].children.findIndex((child) => child._id == action.payload.updatedCategory._id);
-        if(childIndex === -1){
-          state.categories[parentIndex].children.push(action.payload.updatedCategory);
-        }
-        state.categories.forEach((category) => {
-          if(category._id !== action.payload.updatedCategory.parentId) {
-            category.children = category.children.filter((child) => child._id !== action.payload.updatedCategory._id);
-          }
-        });
-        state.categories[parentIndex].children[childIndex] = action.payload.updatedCategory;
-        return;
-      }
-      const index = state.categories.findIndex((category) => category._id == action.payload.updatedCategory._id);
-      state.categories[index] = action.payload.updatedCategory;
+
+    // UPDATE
+    builder.addCase(updateCategory.pending, (state) => { state.loading = true; });
+    builder.addCase(updateCategory.fulfilled, (state) => {
+      state.loading = false; 
+      // No tocamos state.categories, getCategories se encargará
     });
     builder.addCase(updateCategory.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error;
     });
-    builder.addCase(deleteCategory.pending, (state) => {
-      state.loading = true;
-    });
+
+    // DELETE
+    builder.addCase(deleteCategory.pending, (state) => { state.loading = true; });
     builder.addCase(deleteCategory.fulfilled, (state, action) => {
       state.loading = false;
-      state.categories = action.payload.updatedCategories;
+      if(action.payload && action.payload.updatedCategories) {
+          state.categories = action.payload.updatedCategories;
+      }
+      // Si no hay payload.updatedCategories, el dispatch(getCategories) del thunk se encargará
     });
     builder.addCase(deleteCategory.rejected, (state, action) => {
       state.loading = false;

@@ -84,6 +84,45 @@
         "action": "Action"
       },
       "empty": "No recent orders found."
+    },
+    "categories": {
+      "title": "Category Management",
+      "createBtn": "New Category",
+      "headers": {
+        "image": "Image",
+        "name": "Name",
+        "parent": "Parent Category",
+        "actions": "Actions"
+      },
+      "loading": "Loading categories...",
+      "empty": "No categories found.",
+      "childLabel": "Subcategory",
+      "confirmDelete": "Are you sure you want to delete this category?"
+    },
+    "createCategory": {
+      "title": "New Category",
+      "nameLabel": "Category Name",
+      "imageLabel": "Cover Image",
+      "uploadText": "Click to upload image",
+      "parentLabel": "Parent Category (Optional)",
+      "noneOption": "None (Root)",
+      "submit": "Create Category",
+      "loading": "Creating...",
+      "success": "Category created successfully",
+      "cancel": "Cancel",
+      "errorImageRequired": "Image is required."
+    },
+    "editCategory": {
+      "title": "Edit Category",
+      "nameLabel": "Name",
+      "currentImage": "Current Image",
+      "changeImage": "Change Image",
+      "uploadText": "Click to upload new",
+      "parentLabel": "Parent Category",
+      "noneOption": "None (Root)",
+      "submit": "Save Changes",
+      "cancel": "Cancel",
+      "errorImageRequired": "Image is required."
     }
   }
 }

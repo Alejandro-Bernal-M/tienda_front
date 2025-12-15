@@ -18,7 +18,7 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: 'localhost',
-        port: '5000', // Asegúrate de que este sea el puerto de tu backend (Express)
+        port: '5000',
         pathname: '/**',
       },
       // 3. Permitir imágenes si tu backend está en otra IP local (Opcional)
@@ -26,6 +26,12 @@ const nextConfig = {
         protocol: 'http',
         hostname: '127.0.0.1',
         port: '5000', 
+        pathname: '/**',
+      },
+      // 4. Permitir imágenes sin puerto especificado
+      {
+        protocol: 'http',
+        hostname: 'localhost',
         pathname: '/**',
       }
     ],
