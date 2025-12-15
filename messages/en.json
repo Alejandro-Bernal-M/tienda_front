@@ -25,5 +25,41 @@
       "placeholder": "Your email address",
       "button": "Join"
     }
+  },
+  "Session": {
+    "toggle": {
+      "toSignup": "Don't have an account? Sign up here",
+      "toSignin": "Already have an account? Sign in"
+    },
+    "signin": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to continue",
+      "emailPlaceholder": "Email address",
+      "passwordPlaceholder": "Password",
+      "submit": "Sign In",
+      "loading": "Signing in...",
+      "errorGeneric": "Unexpected error",
+      "errorCredentials": "Invalid credentials"
+    },
+    "signup": {
+      "title": "Create Account",
+      "subtitle": "Join the Mokaze community",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email address",
+      "username": "Username",
+      "contact": "Phone number",
+      "password": "Password (min 8 characters)",
+      "confirmPassword": "Confirm password",
+      "uploadImage": "Upload profile photo",
+      "adminPass": "Admin Key",
+      "submit": "Sign Up",
+      "loading": "Creating account...",
+      "switchAdmin": "Admin Mode",
+      "switchUser": "User Mode",
+      "errorMatch": "Passwords do not match",
+      "errorLength": "Password is too short",
+      "success": "Account created successfully"
+    }
   }
 }
