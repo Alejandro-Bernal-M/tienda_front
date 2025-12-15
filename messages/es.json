@@ -123,6 +123,56 @@
       "submit": "Guardar Cambios",
       "cancel": "Cancelar",
       "errorImageRequired": "La imagen es obligatoria."
+    },
+    "products": {
+      "title": "Inventario de Productos",
+      "subtitle": "Gestiona tu catálogo completo",
+      "createBtn": "Nuevo Producto",
+      "headers": {
+        "image": "Imagen",
+        "name": "Producto",
+        "category": "Categoría",
+        "price": "Precio",
+        "stock": "Stock",
+        "actions": "Acciones"
+      },
+      "loading": "Cargando productos...",
+      "empty": "No hay productos registrados.",
+      "confirmDelete": "¿Estás seguro de eliminar este producto? Esta acción no se puede deshacer."
+    },
+    "createProduct": {
+      "title": "Nuevo Producto",
+      "name": "Nombre del producto",
+      "price": "Precio ($)",
+      "quantity": "Stock disponible",
+      "category": "Categoría",
+      "selectCategory": "Selecciona una categoría",
+      "offer": "Descuento (%)",
+      "description": "Descripción",
+      "images": "Imágenes del producto",
+      "uploadText": "Clic para subir imágenes (Múltiples)",
+      "submit": "Crear Producto",
+      "loading": "Creando...",
+      "success": "¡Producto creado con éxito!",
+      "error": "Error al crear el producto.",
+      "filesSelected": "archivos seleccionados"
+    },
+    "editProduct": {
+      "title": "Editar Producto",
+      "name": "Nombre",
+      "price": "Precio",
+      "quantity": "Stock",
+      "offer": "Oferta (%)",
+      "description": "Descripción",
+      "currentImages": "Imágenes Actuales",
+      "newImages": "Agregar Nuevas Imágenes",
+      "category": "Categoría",
+      "selectCategory": "Seleccionar Categoría",
+      "noCategory": "Sin Categoría",
+      "save": "Guardar Cambios",
+      "cancel": "Cancelar",
+      "markedForDeletion": "Se eliminará",
+      "uploadText": "Clic para subir nuevas"
     }
   }
 }

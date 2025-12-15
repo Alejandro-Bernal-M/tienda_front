@@ -123,6 +123,56 @@
       "submit": "Save Changes",
       "cancel": "Cancel",
       "errorImageRequired": "Image is required."
+    },
+    "products": {
+      "title": "Product Inventory",
+      "subtitle": "Manage your full catalog",
+      "createBtn": "New Product",
+      "headers": {
+        "image": "Image",
+        "name": "Product",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "actions": "Actions"
+      },
+      "loading": "Loading products...",
+      "empty": "No products found.",
+      "confirmDelete": "Are you sure you want to delete this product? This action cannot be undone."
+    },
+    "createProduct": {
+      "title": "New Product",
+      "name": "Product Name",
+      "price": "Price ($)",
+      "quantity": "Available Stock",
+      "category": "Category",
+      "selectCategory": "Select Category",
+      "offer": "Discount (%)",
+      "description": "Description",
+      "images": "Product Images",
+      "uploadText": "Click to upload images (Multiple)",
+      "submit": "Create Product",
+      "loading": "Creating...",
+      "success": "Product created successfully!",
+      "error": "Failed to create product.",
+      "filesSelected": "files selected"
+    },
+    "editProduct": {
+      "title": "Edit Product",
+      "name": "Name",
+      "price": "Price",
+      "quantity": "Quantity",
+      "offer": "Offer (%)",
+      "description": "Description",
+      "currentImages": "Current Images",
+      "newImages": "Add New Images",
+      "category": "Category",
+      "selectCategory": "Select Category",
+      "noCategory": "No Category",
+      "save": "Save Changes",
+      "cancel": "Cancel",
+      "markedForDeletion": "Marked for deletion",
+      "uploadText": "Click to upload new"
     }
   }
 }
