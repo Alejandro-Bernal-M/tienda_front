@@ -61,5 +61,29 @@
       "errorLength": "La contraseña es muy corta",
       "success": "Cuenta creada con éxito"
     }
+  },
+  "Admin": {
+    "dashboard": {
+      "title": "Panel de Control",
+      "subtitle": "Vista general de tu tienda Mokaze.",
+      "products": "Productos",
+      "categories": "Categorías",
+      "orders": "Pedidos",
+      "homeSections": "Secciones Inicio",
+      "viewAll": "Ver todo"
+    },
+    "recentOrders": {
+      "title": "Órdenes Recientes",
+      "headers": {
+        "id": "ID Pedido",
+        "customer": "Cliente",
+        "date": "Fecha",
+        "total": "Total",
+        "payment": "Pago",
+        "status": "Estado",
+        "action": "Acción"
+      },
+      "empty": "No hay órdenes recientes."
+    }
   }
 }

@@ -61,5 +61,29 @@
       "errorLength": "Password is too short",
       "success": "Account created successfully"
     }
+  },
+  "Admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "subtitle": "Overview of your Mokaze store.",
+      "products": "Products",
+      "categories": "Categories",
+      "orders": "Orders",
+      "homeSections": "Home Sections",
+      "viewAll": "View all"
+    },
+    "recentOrders": {
+      "title": "Recent Orders",
+      "headers": {
+        "id": "Order ID",
+        "customer": "Customer",
+        "date": "Date",
+        "total": "Total",
+        "payment": "Payment",
+        "status": "Status",
+        "action": "Action"
+      },
+      "empty": "No recent orders found."
+    }
   }
 }
