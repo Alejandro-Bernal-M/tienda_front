@@ -173,6 +173,30 @@
       "cancel": "Cancel",
       "markedForDeletion": "Marked for deletion",
       "uploadText": "Click to upload new"
+    },
+    "orders": {
+      "title": "Order Management",
+      "subtitle": "Manage and track customer orders",
+      "headers": {
+      "id": "Order ID",
+      "customer": "Customer",
+      "shipping": "Shipping",
+      "products": "Products",
+      "payment": "Payment",
+      "total": "Total",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
+      },
+      "status": {
+      "placed": "Placed",
+      "accepted": "Accepted",
+      "processing": "Processing",
+      "shipped": "Shipped",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+      },
+      "empty": "No orders found."
     }
   }
 }

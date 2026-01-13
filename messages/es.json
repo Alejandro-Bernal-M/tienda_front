@@ -173,6 +173,30 @@
       "cancel": "Cancelar",
       "markedForDeletion": "Se eliminará",
       "uploadText": "Clic para subir nuevas"
+    },
+    "orders": {
+      "title": "Gestión de Pedidos",
+      "subtitle": "Administra y rastrea las órdenes de los clientes",
+      "headers": {
+        "id": "ID Pedido",
+        "customer": "Cliente",
+        "shipping": "Envío",
+        "products": "Productos",
+        "payment": "Pago",
+        "total": "Total",
+        "status": "Estado",
+        "date": "Fecha",
+        "actions": "Acciones"
+      },
+      "status": {
+        "placed": "Realizado",
+        "accepted": "Aceptado",
+        "processing": "Procesando",
+        "shipped": "Enviado",
+        "delivered": "Entregado",
+        "cancelled": "Cancelado"
+      },
+      "empty": "No se encontraron pedidos."
     }
   }
 }
