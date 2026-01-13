@@ -198,5 +198,43 @@
       },
       "empty": "No orders found."
     }
+  },
+  "CartPopup": {
+    "title": "Your Cart",
+    "empty": "Your cart is empty",
+    "startShopping": "Start Shopping",
+    "subtotal": "Subtotal",
+    "viewCart": "View Full Cart",
+    "clearCart": "Clear Cart",
+    "items": "items"
+  },
+  "Cart": {
+    "title": "Your Cart",
+    "emptyTitle": "Your cart is empty",
+    "emptySubtitle": "Looks like you haven't added anything yet.",
+    "startShopping": "Start Shopping",
+    "productUnavailable": "Product unavailable",
+    "uncategorized": "Uncategorized",
+    "unitPrice": "Unit:",
+    "delete": "Remove",
+    "table": {
+      "product": "Product",
+      "quantity": "Quantity",
+      "total": "Total"
+    },
+    "summary": {
+      "title": "Order Summary",
+      "items": "Items",
+      "subtotal": "Subtotal",
+      "total": "Estimated Total",
+      "checkout": "Proceed to Checkout",
+      "checking": "Checking stock...",
+      "clear": "Clear Cart",
+      "disclaimer": "Taxes and shipping calculated at checkout."
+    },
+    "alerts": {
+      "confirmClear": "Are you sure you want to clear the cart?",
+      "errorCheckout": "An error occurred during processing. Please try again."
+    }
   }
 }

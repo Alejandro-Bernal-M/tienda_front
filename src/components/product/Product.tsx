@@ -22,7 +22,7 @@ export default function Product(product: ProductType) {
     let productWithQuantity = { ...product, quantity: productQuantity };
 
     dispatch(addItem(productWithQuantity));
-    if (pathname === '/products' && product._id && token) {
+    if ( product._id && token) {
       let newPrice = product.price;
       if (product.offer) {
         newPrice = product.price - product.price * product.offer / 100;

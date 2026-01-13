@@ -105,6 +105,11 @@ export default function Navbar() {
     router.push('/');
   };
 
+  // Lógica para cerrar el carrito
+  const closeCart = () => {
+    dispatch(hideCart());
+  };
+
   const isActive = (route: string) => pathname === route;
 
   // Renderizado (Igual que antes)
@@ -229,7 +234,7 @@ export default function Navbar() {
 
         {showCart && isMobileMenuOpen && (
            <div className="absolute top-full w-full z-50 md:hidden">
-             <CartPopup />
+             <CartPopup onClose={() => closeCart()} />
            </div>
         )}
       </nav>

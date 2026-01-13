@@ -198,5 +198,43 @@
       },
       "empty": "No se encontraron pedidos."
     }
+  },
+  "CartPopup": {
+    "title": "Tu Carrito",
+    "empty": "Tu carrito está vacío",
+    "startShopping": "Empezar a comprar",
+    "subtotal": "Subtotal",
+    "viewCart": "Ver Carrito Completo",
+    "clearCart": "Vaciar Carrito",
+    "items": "artículos"
+  },
+  "Cart": {
+    "title": "Tu Carrito",
+    "emptyTitle": "Tu carrito está vacío",
+    "emptySubtitle": "Parece que aún no has añadido nada.",
+    "startShopping": "Ir a la Tienda",
+    "productUnavailable": "Producto no disponible",
+    "uncategorized": "General",
+    "unitPrice": "Unitario:",
+    "delete": "Eliminar",
+    "table": {
+      "product": "Producto",
+      "quantity": "Cantidad",
+      "total": "Total"
+    },
+    "summary": {
+      "title": "Resumen del Pedido",
+      "items": "Artículos",
+      "subtotal": "Subtotal",
+      "total": "Total Estimado",
+      "checkout": "Ir a Pagar",
+      "checking": "Verificando stock...",
+      "clear": "Vaciar Carrito",
+      "disclaimer": "Impuestos y gastos de envío calculados al finalizar."
+    },
+    "alerts": {
+      "confirmClear": "¿Estás seguro de vaciar el carrito?",
+      "errorCheckout": "Ocurrió un error al procesar. Intenta nuevamente."
+    }
   }
 }
