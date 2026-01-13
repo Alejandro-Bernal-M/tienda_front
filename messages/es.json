@@ -236,5 +236,27 @@
       "confirmClear": "¿Estás seguro de vaciar el carrito?",
       "errorCheckout": "Ocurrió un error al procesar. Intenta nuevamente."
     }
+  },
+  "Products": {
+    "title": "Nuestros Productos",
+    "allProducts": "Todo el catálogo",
+    "subtitleAll": "Todos nuestros productos",
+    "subtitleCategory": "Productos en",
+    "loading": "Cargando catálogo...",
+    "error": "Hubo un error al cargar los productos. Por favor recarga la página.",
+    "empty": "No se encontraron productos en esta categoría.",
+    "categories": "Categorías"
+  },
+  "ProductCard": {
+    "category": "Categoría:",
+    "adminInfo": "Info Admin:",
+    "createdBy": "Creado por:",
+    "offer": "OFF",
+    "addToCart": "Añadir al Carrito",
+    "adding": "Añadiendo...",
+    "added": "¡Añadido!",
+    "outOfStock": "Agotado",
+    "quantity": "Cant",
+    "available": "disponibles"
   }
 }

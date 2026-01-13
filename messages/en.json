@@ -236,5 +236,27 @@
       "confirmClear": "Are you sure you want to clear the cart?",
       "errorCheckout": "An error occurred during processing. Please try again."
     }
+  },
+  "Products": {
+    "title": "Our Products",
+    "allProducts": "Full Catalog",
+    "subtitleAll": "All our products",
+    "subtitleCategory": "Products in",
+    "loading": "Loading catalog...",
+    "error": "An error occurred while loading products. Please reload the page.",
+    "empty": "No products found in this category.",
+    "categories": "Categories"
+  },
+  "ProductCard": {
+    "category": "Category:",
+    "adminInfo": "Admin Info:",
+    "createdBy": "Created by:",
+    "offer": "OFF",
+    "addToCart": "Add to Cart",
+    "adding": "Adding...",
+    "added": "Added!",
+    "outOfStock": "Out of Stock",
+    "quantity": "Qty",
+    "available": "available"
   }
 }
