@@ -102,38 +102,49 @@ export default function CartPage() {
     }
   }
 
-  // Checkout Logic
+  // --- MERCADO PAGO CHECKOUT LOGIC ---
   async function handleCheckout() {
     setCheckoutError(null);
     setIsCheckingOut(true);
 
-    const productsToCheckout = items.map((item) => ({
+    // 1. Preparamos los datos mínimos necesarios (ID y Cantidad)
+    const itemsToSend = items.map((item) => ({
         _id: item._id,
         quantity: item.quantity,
     }));
 
-    const data = {
-      cartItems: productsToCheckout,
-      totalAmount: totalPrices,
-    };
-
     try {
-      const response = await fetch(apiEndPoints.checkProductsForCheckout, {
+      // 2. Llamamos al backend para crear la preferencia de pago
+      // Asegúrate de que 'createPreference' esté definido en tu utils/routes.ts
+      const response = await fetch(apiEndPoints.createPreference, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify(data),
+        headers: { 
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': `Bearer ${token}` 
+        },
+        body: JSON.stringify({ 
+            items: itemsToSend,
+            // Si tu backend necesita el ID explícito y no lo saca del token:
+            // userId: user?._id 
+        }),
       });
+
       const result = await response.json();
       
-      if(result.checkStatus){
-        window.location.href = '/checkout';
-      } else {
-        setCheckoutError(result.message || t('alerts.errorCheckout'));
-        setIsCheckingOut(false);
+      if (!response.ok) {
+        throw new Error(result.message || t('alerts.errorCheckout'));
       }
-    } catch (error) {
+      
+      // 3. Redirigimos a la URL de Mercado Pago
+      if(result.url){
+        window.location.href = result.url;
+      } else {
+        throw new Error("No redirection URL found");
+      }
+
+    } catch (error: any) {
       console.error(error);
-      setCheckoutError(t('alerts.errorCheckout'));
+      setCheckoutError(error.message || t('alerts.errorCheckout'));
       setIsCheckingOut(false);
     }
   }
@@ -176,7 +187,6 @@ export default function CartPage() {
             {/* --- LISTA DE PRODUCTOS (Izquierda) --- */}
             <div className="lg:col-span-2 space-y-6">
                 {items.map((item) => {
-                    // Encontrar detalles completos del producto
                     const productDetails = products.find(p => p._id === item._id);
                     const mainImage = productDetails?.productImages?.[0]?.img;
 
@@ -205,7 +215,6 @@ export default function CartPage() {
                                     <h3 className="text-lg font-serif font-bold text-mokaze-primary mb-1">
                                         {productDetails?.name || t('productUnavailable')}
                                     </h3>
-                                    {/* Botón Borrar (Desktop) */}
                                     <button 
                                         onClick={() => handleRemoveItemComplete(item._id)}
                                         className="hidden sm:block text-mokaze-dark/30 hover:text-red-500 transition-colors p-1"
@@ -220,8 +229,6 @@ export default function CartPage() {
                                 </p>
 
                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
-                                    
-                                    {/* Control Cantidad */}
                                     <div className="flex items-center border border-mokaze-dark/20 rounded-sm">
                                         <button 
                                             onClick={() => handleDecrement(item._id)}
@@ -240,7 +247,6 @@ export default function CartPage() {
                                         </button>
                                     </div>
 
-                                    {/* Precio */}
                                     <div className="text-right">
                                         <p className="text-xs text-mokaze-dark/40 mb-1">
                                             {t('unitPrice')} {formatCurrency(item.price)}
@@ -251,7 +257,6 @@ export default function CartPage() {
                                     </div>
                                 </div>
 
-                                {/* Botón Borrar (Móvil) */}
                                 <button 
                                     onClick={() => handleRemoveItemComplete(item._id)}
                                     className="sm:hidden mt-4 text-xs text-red-500 flex items-center justify-center gap-1 w-full py-2 border border-red-100 bg-red-50 rounded-sm"
@@ -263,7 +268,6 @@ export default function CartPage() {
                     );
                 })}
                 
-                {/* Botón Vaciar Carrito */}
                 <div className="text-left pt-4">
                     <button 
                         onClick={handleClearCart}
@@ -273,7 +277,6 @@ export default function CartPage() {
                     </button>
                 </div>
             </div>
-
 
             {/* --- RESUMEN DE ORDEN (Derecha) --- */}
             <div className="lg:col-span-1">

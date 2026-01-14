@@ -26,6 +26,7 @@ const apiEndPoints = {
   getHomeSections: process.env.NEXT_PUBLIC_API+'/homeSections', // method: GET
   updateHomeSection: (id: string) => process.env.NEXT_PUBLIC_API+`/homeSection/update/${id}`, // method: PUT
   deleteHomeSection: (id: string) => process.env.NEXT_PUBLIC_API+`/homeSection/delete/${id}`, // method: DELETE
+  createPreference: `${process.env.NEXT_PUBLIC_API}/payment/create-preference`, // method: POST
 }
 
 export default apiEndPoints;

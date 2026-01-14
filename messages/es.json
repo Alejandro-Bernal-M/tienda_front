@@ -258,5 +258,16 @@
     "outOfStock": "Agotado",
     "quantity": "Cant",
     "available": "disponibles"
+  },
+  "Checkout": {
+    "success": {
+      "loading": "Cargando estado del pago...",
+      "approvedTitle": "¡Pago Exitoso!",
+      "approvedMessage": "Tu pedido ha sido procesado correctamente.",
+      "transactionId": "ID Transacción:",
+      "failedTitle": "Pago Pendiente o Rechazado",
+      "failedMessage": "El estado de tu pago es:",
+      "backToStore": "Volver a la Tienda"
+    }
   }
 }

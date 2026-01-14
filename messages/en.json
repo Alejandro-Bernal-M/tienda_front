@@ -258,5 +258,16 @@
     "outOfStock": "Out of Stock",
     "quantity": "Qty",
     "available": "available"
+  },
+  "Checkout": {
+    "success": {
+      "loading": "Loading payment status...",
+      "approvedTitle": "Payment Successful!",
+      "approvedMessage": "Your order has been processed successfully.",
+      "transactionId": "Transaction ID:",
+      "failedTitle": "Payment Pending or Declined",
+      "failedMessage": "Your payment status is:",
+      "backToStore": "Back to Store"
+    }
   }
 }
