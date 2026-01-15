@@ -45,19 +45,18 @@ export default function CartPage() {
   }
 
   // Restar 1 unidad
-  function handleDecrement(_id: string) {
-    const item = items.find(i => i._id === _id);
-    if (item && item.quantity === 1) {
-        handleRemoveItemComplete(_id);
+  function handleDecrement(item: any) {
+    if (item.quantity === 1) {
+        handleRemoveItemComplete(item._id);
         return;
     }
 
-    if(_id){
+    if(item._id){
       const quantityToRemove = 1;
-      dispatch(removeItemQuantity({_id: _id, quantity: quantityToRemove}));
+      dispatch(removeItemQuantity({_id: item._id, quantity: quantityToRemove, price: item.price, color: item.color, size: item.size}));
       
       if(token){
-        let info = { _id: _id, quantity: quantityToRemove };
+        let info = { _id: item._id, quantity: quantityToRemove, price: item.price, size: item.size, color: item.color };
         dispatch(subtractQuantityFromCartDB({item: info, token: token}));
       }
     }
@@ -74,32 +73,38 @@ export default function CartPage() {
   }
 
   // Sumar 1 unidad
-  function handleIncrement(_id: string) {
-    const item = products.find(p => p._id === _id);
-    if (!item || !item._id) return;
+  function handleIncrement(item: any, productDetails: any) {
+    if (!item._id) return;
 
-    if(_id){
-      const quantityToAdd = 1;
-      let product = {
-        _id: item._id,
-        quantity: quantityToAdd,
-        price: item.price,
-        offer: item.offer,
-      };
+    const quantityToAdd = 1;
+    
+    // Objeto para la DB (requiere estructura específica)
+    let productToAddDB = {
+      _id: item._id, // ID de la línea del carrito
+      quantity: quantityToAdd,
+      price: item.price,
+      offer: item.offer || 0,
+      size: item.size,
+      color: item.color,
+      name: productDetails?.name,
+      description: productDetails?.description,
+      category: productDetails?.category,
+    };
 
-      if(token) {
-        dispatch(addItemToCartDB({ item: product, token }));
-      }
-      
-      dispatch(addItem({
-        _id: _id, 
-        quantity: quantityToAdd, 
-        name: item.name, 
-        price: item.price, 
-        description: item.description, 
-        category: item.category
-      }));
+    if(token) {
+      dispatch(addItemToCartDB({ item: productToAddDB, token }));
     }
+    
+    // Acción síncrona de Redux
+    dispatch(addItem({
+      _id: item._id, // Importante: pasamos el ID de la línea para que Redux sepa cuál actualizar
+      quantity: quantityToAdd, 
+      price: item.price, 
+      size: item.size,
+      color: item.color,
+      // Pasamos el producto padre para mantener la referencia si es un item nuevo (aunque aquí es update)
+      product: item.product 
+    }));
   }
 
   // --- MERCADO PAGO CHECKOUT LOGIC ---
@@ -107,25 +112,28 @@ export default function CartPage() {
     setCheckoutError(null);
     setIsCheckingOut(true);
 
-    // 1. Preparamos los datos mínimos necesarios (ID y Cantidad)
-    const itemsToSend = items.map((item) => ({
-        _id: item._id,
-        quantity: item.quantity,
-    }));
+    const itemsToSend = items.map((item) => {
+        const realProductId = item._id;
+
+        return {
+            _id: realProductId, 
+            quantity: item.quantity,
+            size: item.size,
+            color: item.color
+        };
+    });
 
     try {
-      // 2. Llamamos al backend para crear la preferencia de pago
-      // Asegúrate de que 'createPreference' esté definido en tu utils/routes.ts
       const response = await fetch(apiEndPoints.createPreference, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': `Bearer ${token}` 
+            'Authorization': `Bearer ${token}`
+            // No se necesitan headers de ngrok si usas Serveo o Cloudflare
         },
         body: JSON.stringify({ 
             items: itemsToSend,
-            // Si tu backend necesita el ID explícito y no lo saca del token:
-            // userId: user?._id 
+            userId: token ? 'ID_USER' : null // Ajustar según tu lógica de auth
         }),
       });
 
@@ -135,7 +143,6 @@ export default function CartPage() {
         throw new Error(result.message || t('alerts.errorCheckout'));
       }
       
-      // 3. Redirigimos a la URL de Mercado Pago
       if(result.url){
         window.location.href = result.url;
       } else {
@@ -149,7 +156,6 @@ export default function CartPage() {
     }
   }
 
-  // Helper de moneda
   const formatCurrency = (amount: number) => 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);
 
@@ -189,17 +195,22 @@ export default function CartPage() {
                 {items.map((item) => {
                     const productDetails = products.find(p => p._id === item._id);
                     const mainImage = productDetails?.productImages?.[0]?.img;
+                    
+                    const imageUrl = mainImage?.startsWith('http') 
+                        ? mainImage 
+                        : `${imageBaseUrl}${mainImage}`;
 
                     return (
-                        <div key={item._id} className="bg-white p-4 sm:p-6 rounded-sm border border-mokaze-primary/5 shadow-sm flex flex-col sm:flex-row gap-6 items-center sm:items-start transition-all hover:shadow-md">
+                        <div key={item._id + item.size + item.color} className="bg-white p-4 sm:p-6 rounded-sm border border-mokaze-primary/5 shadow-sm flex flex-col sm:flex-row gap-6 items-center sm:items-start transition-all hover:shadow-md">
                             
                             {/* Imagen */}
                             <div className="relative w-32 h-32 flex-shrink-0 bg-gray-100 rounded-sm overflow-hidden border border-gray-200">
                                 {mainImage ? (
                                     <Image 
-                                        src={`${imageBaseUrl}${mainImage}`} 
+                                        src={imageUrl} 
                                         alt={productDetails?.name || t('productUnavailable')} 
                                         fill 
+                                        sizes="(max-width: 768px) 100vw, 33vw"
                                         className="object-cover"
                                     />
                                 ) : (
@@ -212,9 +223,26 @@ export default function CartPage() {
                             {/* Info */}
                             <div className="flex-grow text-center sm:text-left w-full">
                                 <div className="flex justify-between items-start">
-                                    <h3 className="text-lg font-serif font-bold text-mokaze-primary mb-1">
-                                        {productDetails?.name || t('productUnavailable')}
-                                    </h3>
+                                    <div>
+                                        <h3 className="text-lg font-serif font-bold text-mokaze-primary mb-1">
+                                            {productDetails?.name || t('productUnavailable')}
+                                        </h3>
+                                        
+                                        {/* --- VARIANTES (TALLA / COLOR) --- */}
+                                        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mt-2 mb-3">
+                                            {item.size && (
+                                                <span className="inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200">
+                                                    Size: {item.size}
+                                                </span>
+                                            )}
+                                            {item.color && (
+                                                <span className="inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200">
+                                                    Color: {item.color}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </div>
+
                                     <button 
                                         onClick={() => handleRemoveItemComplete(item._id)}
                                         className="hidden sm:block text-mokaze-dark/30 hover:text-red-500 transition-colors p-1"
@@ -224,14 +252,15 @@ export default function CartPage() {
                                     </button>
                                 </div>
                                 
-                                <p className="text-sm text-mokaze-dark/50 mb-4 capitalize">
+                                <p className="text-sm text-mokaze-dark/50 mb-4 capitalize hidden sm:block">
                                     {productDetails?.category?.name || t('uncategorized')}
                                 </p>
 
-                                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-4">
+                                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-2">
+                                    {/* Controles de Cantidad */}
                                     <div className="flex items-center border border-mokaze-dark/20 rounded-sm">
                                         <button 
-                                            onClick={() => handleDecrement(item._id)}
+                                            onClick={() => handleDecrement(item)}
                                             className="px-3 py-2 text-mokaze-dark/60 hover:bg-mokaze-base hover:text-mokaze-accent transition-colors"
                                         >
                                             <Minus className="w-3 h-3" />
@@ -240,7 +269,7 @@ export default function CartPage() {
                                             {item.quantity}
                                         </span>
                                         <button 
-                                            onClick={() => handleIncrement(item._id)}
+                                            onClick={() => handleIncrement(item, productDetails)}
                                             className="px-3 py-2 text-mokaze-dark/60 hover:bg-mokaze-base hover:text-mokaze-accent transition-colors"
                                         >
                                             <Plus className="w-3 h-3" />
@@ -248,7 +277,7 @@ export default function CartPage() {
                                     </div>
 
                                     <div className="text-right">
-                                        <p className="text-xs text-mokaze-dark/40 mb-1">
+                                        <p className="text-xs text-mokaze-dark/40 mb-1 hidden sm:block">
                                             {t('unitPrice')} {formatCurrency(item.price)}
                                         </p>
                                         <p className="text-lg font-bold text-mokaze-primary">

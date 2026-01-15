@@ -134,6 +134,8 @@
         "category": "Category",
         "price": "Price",
         "stock": "Stock",
+        "sizes":"Sizes",
+        "colors": "Colors",
         "actions": "Actions"
       },
       "loading": "Loading products...",
@@ -155,7 +157,11 @@
       "loading": "Creating...",
       "success": "Product created successfully!",
       "error": "Failed to create product.",
-      "filesSelected": "files selected"
+      "filesSelected": "files selected",
+      "sizes": "Sizes",
+      "colors": "Colors",
+      "sizesHint": "Enter sizes separated by commas (e.g., S, M, L, XL)",
+      "colorsHint": "Enter colors separated by commas (e.g., Red, Blue, Green)"
     },
     "editProduct": {
       "title": "Edit Product",
@@ -172,7 +178,11 @@
       "save": "Save Changes",
       "cancel": "Cancel",
       "markedForDeletion": "Marked for deletion",
-      "uploadText": "Click to upload new"
+      "uploadText": "Click to upload new",
+      "sizes": "Sizes",
+      "colors": "Colors",
+      "sizesHint": "Enter sizes separated by commas (e.g., S, M, L, XL)",
+      "colorsHint": "Enter colors separated by commas (e.g., Red, Blue, Green)"
     },
     "orders": {
       "title": "Order Management",
@@ -257,7 +267,12 @@
     "added": "Added!",
     "outOfStock": "Out of Stock",
     "quantity": "Qty",
-    "available": "available"
+    "available": "available",
+    "selectSizeColor": "Please select size and color",
+    "sizes": "Sizes:",
+    "colors": "Colors:",
+    "selectSize": "Select size",
+    "selectColor": "Select color"
   },
   "Checkout": {
     "success": {

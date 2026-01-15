@@ -133,6 +133,8 @@ export default function AdminProducts() {
                             <th className="py-4 px-4 font-medium">{t('headers.category')}</th>
                             <th className="py-4 px-4 font-medium">{t('headers.price')}</th>
                             <th className="py-4 px-4 font-medium">{t('headers.stock')}</th>
+                            <th className="py-4 px-4 font-medium">{t('headers.sizes')}</th>
+                            <th className="py-4 px-4 font-medium">{t('headers.colors')}</th>
                             <th className="py-4 px-4 font-medium text-right">{t('headers.actions')}</th>
                         </tr>
                     </thead>
@@ -199,6 +201,20 @@ export default function AdminProducts() {
                                             : 'bg-red-50 text-red-600'
                                     }`}>
                                         {product.quantity > 0 ? `${product.quantity} un.` : 'Agotado'}
+                                    </span>
+                                </td>
+
+                                {/* Tallas */}
+                                <td className="py-3 px-4 text-sm">
+                                    <span className="bg-mokaze-sand/30 px-2 py-1 rounded-sm text-xs border border-mokaze-sand/50">
+                                        {product.sizes?.join(', ') || 'Sin Tallas'}
+                                    </span>
+                                </td>
+
+                                {/* Colores */}
+                                <td className="py-3 px-4 text-sm">
+                                    <span className="bg-mokaze-sand/30 px-2 py-1 rounded-sm text-xs border border-mokaze-sand/50">
+                                        {product.colors?.join(', ') || 'Sin Colores'}
                                     </span>
                                 </td>
 

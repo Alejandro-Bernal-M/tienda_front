@@ -132,6 +132,30 @@ export default function CreateProductPopup({ setDisplayPopup }: CreateProductPop
             </div>
         </div>
 
+        {/* TALLAS */}
+        <div>
+            <label htmlFor="sizes" className={labelClass}>{t('sizes')}</label>
+            <input 
+          type="text" 
+          id="sizes" 
+          name="sizes" 
+          className={inputClass} 
+            />
+            <p className="text-xs text-mokaze-dark/40 mt-1">{t('sizesHint')}</p>
+        </div>
+
+        {/* COLORES */}
+        <div>
+            <label htmlFor="colors" className={labelClass}>{t('colors')}</label>
+            <input 
+          type="text" 
+          id="colors" 
+          name="colors" 
+          className={inputClass} 
+            />
+            <p className="text-xs text-mokaze-dark/40 mt-1">{t('colorsHint')}</p>
+        </div>
+
         {/* CATEGORÍA Y DESCUENTO (Grid) */}
         <div className="grid grid-cols-2 gap-6 mt-2">
             <div>

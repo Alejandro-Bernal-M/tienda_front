@@ -65,10 +65,12 @@ export const getCartItemsDB = createAsyncThunk(
 
 export const subtractQuantityFromCartDB = createAsyncThunk(
   'cart/subtractQuantityFromCart',
-  async (info: {item: any, token: string},{ dispatch }) => {
+  async (info: {item: ProductCart, token: string},{ dispatch }) => {
     const data = {
       productId: info.item._id,
       quantity: info.item.quantity,
+      size: info.item.size,
+      color: info.item.color
     }
     const response = await fetch( apiEndPoints.subtractQuantityFromCart, {
       method: 'POST',
@@ -112,7 +114,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<ProductType>) => {
+    addItem: (state, action: PayloadAction<ProductCart>) => {
       let price, offer;
       if (action.payload._id) {
         if (action.payload.offer) {
@@ -122,7 +124,7 @@ const cartSlice = createSlice({
           offer = 0;
           price = action.payload.price;
         }
-        let item = state.items.find(item => item._id === action.payload._id);
+        let item = state.items.find(item => item._id === action.payload._id && item.size === action.payload.size && item.color === action.payload.color);
         if (item) {
           item.quantity = item.quantity + action.payload.quantity;
         } else {
@@ -130,16 +132,18 @@ const cartSlice = createSlice({
             _id: action.payload._id,
             quantity: action.payload.quantity,
             offer: offer,
-            price: price
+            price: price,
+            size: action.payload.size,
+            color: action.payload.color,
           });
         }
         state.totalProducts = state.items.length;
         state.totalPrices = state.totalPrices + (price * action.payload.quantity);
       }
     },
-    removeItemQuantity: (state, action:PayloadAction<RemoveItem>) => {
+    removeItemQuantity: (state, action:PayloadAction<ProductCart>) => {
       console.log('removeItemQuantity', action.payload)
-      let item = state.items.find(item => item._id === action.payload._id);
+      let item = state.items.find(item => item._id === action.payload._id && item.size === action.payload.size && item.color === action.payload.color);
       if (item) {
         if(item.quantity - action.payload.quantity === 0) {
           state.items = state.items.filter(item => item._id !== action.payload._id);

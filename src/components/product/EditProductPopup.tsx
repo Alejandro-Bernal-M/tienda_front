@@ -124,6 +124,32 @@ export default function EditProductPopup({ productForEdit, categories, setEditPo
           </div>
         </div>
 
+        {/* TALLAS */}
+        <div>
+            <label htmlFor="sizes" className={labelClass}>{t('sizes')}</label>
+            <input 
+          type="text" 
+          id="sizes" 
+          name="sizes" 
+          className={inputClass} 
+          defaultValue={productForEdit.sizes ? productForEdit.sizes.join(', ') : ''}
+            />
+            <p className="text-xs text-mokaze-dark/40 mt-1">{t('sizesHint')}</p>
+        </div>
+
+        {/* COLORES */}
+        <div>
+            <label htmlFor="colors" className={labelClass}>{t('colors')}</label>
+            <input 
+          type="text" 
+          id="colors" 
+          name="colors" 
+          className={inputClass}
+          defaultValue={productForEdit.colors ? productForEdit.colors.join(', ') : ''}
+            />
+            <p className="text-xs text-mokaze-dark/40 mt-1">{t('colorsHint')}</p>
+        </div>
+
         {/* DESCRIPCIÓN */}
         <label className={labelClass} htmlFor="description">{t('description')}</label>
         <textarea 

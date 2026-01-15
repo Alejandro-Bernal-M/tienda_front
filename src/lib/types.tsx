@@ -5,6 +5,9 @@ interface Product {
   quantity: number;
   category: {name: string, _id: string};
   offer?: number;
+  sizes?: string[];
+  colors?: string[];
+  slug?: string;
   productImages?: {img: string, _id: string}[];
   createdAt?: string;
   createdBy?: {firstName: string, lastName: string, _id: string, fullName: string};
@@ -25,6 +28,14 @@ interface ProductCart {
   quantity: number;
   price: number;
   offer?: number;
+  size: string;
+  color: string;
+  name?: string;
+  description?: string;
+  category?: {name: string, _id: string};
+  slug?: string;
+  productImages?: {img: string, _id: string}[];
+  product?: string;
 }
 
 interface CartState {

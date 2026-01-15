@@ -134,6 +134,8 @@
         "category": "Categoría",
         "price": "Precio",
         "stock": "Stock",
+        "colors": "Colores",
+        "sizes": "Tallas",
         "actions": "Acciones"
       },
       "loading": "Cargando productos...",
@@ -155,7 +157,11 @@
       "loading": "Creando...",
       "success": "¡Producto creado con éxito!",
       "error": "Error al crear el producto.",
-      "filesSelected": "archivos seleccionados"
+      "filesSelected": "archivos seleccionados",
+      "sizes": "Tallas",
+      "colors":"Colores",
+      "sizesHint":"Ingresa las tallas separadas por comas (p.ej., S, M, L, XL)",
+      "colorsHint":"Ingresa los colores separados por comas (p.ej., Rojo, Azul, Verde)"
     },
     "editProduct": {
       "title": "Editar Producto",
@@ -172,7 +178,11 @@
       "save": "Guardar Cambios",
       "cancel": "Cancelar",
       "markedForDeletion": "Se eliminará",
-      "uploadText": "Clic para subir nuevas"
+      "uploadText": "Clic para subir nuevas",
+      "sizes": "Tallas",
+      "colors": "Colores",
+      "sizesHint": "Ingresa las tallas separadas por comas (p.ej., S, M, L, XL)",
+      "colorsHint": "Ingresa los colores separados por comas (p.ej., Rojo, Azul, Verde)"
     },
     "orders": {
       "title": "Gestión de Pedidos",
@@ -257,7 +267,12 @@
     "added": "¡Añadido!",
     "outOfStock": "Agotado",
     "quantity": "Cant",
-    "available": "disponibles"
+    "available": "disponibles",
+    "selectSizeColor": "Por favor selecciona talla y color",
+    "sizes": "Tallas:",
+    "colors": "Colores:",
+    "selectSize": "Selecciona talla",
+    "selectColor": "Selecciona color"
   },
   "Checkout": {
     "success": {

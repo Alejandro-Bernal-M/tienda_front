@@ -17,6 +17,8 @@ export default function Product(product: ProductType) {
 
   const [currentImage, setCurrentImage] = useState(0);
   const [productQuantity, setProductQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [isAdding, setIsAdding] = useState(false);
   const [buttonText, setButtonText] = useState(t('addToCart'));
 
@@ -24,8 +26,6 @@ export default function Product(product: ProductType) {
   const hasMultipleImages = product.productImages && product.productImages.length > 1;
   const isOutOfStock = product.quantity === 0;
 
-  // Corrección 1: Cálculo seguro del precio final
-  // Usamos (product.offer || 0) para evitar errores si es undefined
   const hasOffer = (product.offer || 0) > 0;
   
   const finalPrice = hasOffer
@@ -55,21 +55,31 @@ export default function Product(product: ProductType) {
 
   function handleAddToCart() {
     if (isOutOfStock) return;
+    if (!selectedSize || !selectedColor) {
+      alert(t('selectSizeColor'));
+      return;
+    }
+    
+    if (!product._id) {
+      alert('Product ID is missing');
+      return;
+    }
     
     setIsAdding(true);
     setButtonText(t('adding'));
 
-    const productWithQuantity = { ...product, quantity: productQuantity };
     
-    dispatch(addItem(productWithQuantity));
-
+    
     if (product._id && token) {
       const item = {
         _id: product._id,
         quantity: productQuantity,
         price: finalPrice,
+        size: selectedSize,
+        color: selectedColor,
         offer: product.offer,
       };
+      dispatch(addItem(item));
       dispatch(addItemToCartDB({ item, token }));
     }
 
@@ -151,6 +161,47 @@ export default function Product(product: ProductType) {
         <p className="text-sm text-mokaze-dark/60 line-clamp-2 mb-4 flex-grow">
             {product.description}
         </p>
+
+        {/* SELECTORES DE TALLA Y COLOR */}
+        <div className="flex gap-4 mb-4">
+          {product.sizes && product.sizes.length > 0 && (
+            <div>
+              <label htmlFor="size" className="block text-xs font-bold text-mokaze-dark/60 mb-1">
+                {t('sizes')}
+              </label>
+              <select
+                id="size"
+                value={selectedSize || ''}
+                onChange={(e) => setSelectedSize(e.target.value)}
+                className="border border-mokaze-dark/20 rounded-sm p-2 text-sm w-full bg-transparent text-mokaze-primary focus:outline-none focus:border-mokaze-accent transition-colors duration-300"
+              >
+                <option value="" disabled>{t('selectSize')}</option>
+                {product.sizes.map((size) => (
+                  <option key={size} value={size}>{size}</option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {product.colors && product.colors.length > 0 && (
+            <div>
+              <label htmlFor="color" className="block text-xs font-bold text-mokaze-dark/60 mb-1">
+                {t('colors')}
+              </label>
+              <select
+                id="color"
+                value={selectedColor || ''}
+                onChange={(e) => setSelectedColor(e.target.value)}
+                className="border border-mokaze-dark/20 rounded-sm p-2 text-sm w-full bg-transparent text-mokaze-primary focus:outline-none focus:border-mokaze-accent transition-colors duration-300"
+              >
+                <option value="" disabled>{t('selectColor')}</option>
+                {product.colors.map((color) => (
+                  <option className="uppercase" key={color} value={color}>{color}</option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
 
         {/* PRECIO */}
         <div className="flex items-baseline gap-2 mb-4">
