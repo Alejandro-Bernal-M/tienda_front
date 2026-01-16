@@ -116,7 +116,7 @@ const homeSectionsSlice = createSlice({
     });
     builder.addCase(createHomeSection.fulfilled, (state, action) => {
       state.loading = false;
-      let newHomeSections = [...state.homeSections, action.payload.homeSection].sort((a: HomeSection, b: HomeSection) => a.order - b.order);
+      let newHomeSections = [...state.homeSections, action.payload.homeSection].sort((a: HomeSection, b: HomeSection) => (a.order ?? 0) - (b.order ?? 0));
       state.homeSections = newHomeSections;
     });
     builder.addCase(createHomeSection.rejected, (state, action) => {

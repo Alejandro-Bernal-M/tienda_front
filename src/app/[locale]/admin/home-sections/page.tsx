@@ -6,7 +6,7 @@ import { HomeSection } from "@/lib/types";
 import EditHomeSectionPopup from "@/components/homeSection/EditHomeSectionPopup";
 import { deleteHomeSection } from "@/lib/features/homeSection/homeSectionsSlice";
 
-export default function homeSections(){
+export default function HomeSections(){
   const dispatch = useAppDispatch();
   const { token } = useAppSelector((state) => state.user);
   const { homeSections } = useAppSelector((state) => state.homeSections);
