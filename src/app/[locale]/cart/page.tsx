@@ -24,7 +24,7 @@ export default function CartPage() {
   
   // Redux States
   const { items, totalProducts, totalPrices } = useAppSelector((state) => state.cart);
-  const { token } = useAppSelector((state) => state.user);
+  const { token, user } = useAppSelector((state) => state.user);
   const { products } = useAppSelector((state) => state.products);
 
   // Local States
@@ -133,7 +133,7 @@ export default function CartPage() {
         },
         body: JSON.stringify({ 
             items: itemsToSend,
-            userId: token ? 'ID_USER' : null // Ajustar según tu lógica de auth
+            userId: token ? user?._id : null // Ajustar según tu lógica de auth
         }),
       });
 
