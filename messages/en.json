@@ -285,6 +285,16 @@
       "failedTitle": "Payment Pending or Declined",
       "failedMessage": "Your payment status is:",
       "backToStore": "Back to Store"
+    },
+    "failure": {
+      "title": "Payment Not Processed",
+      "message": "We couldn't complete your payment. You can review the details below or try again.",
+      "detailsTitle": "Error Details",
+      "statusLabel": "Status:",
+      "paymentTypeLabel": "Payment Type:",
+      "retryButton": "Retry Payment",
+      "backToStore": "Back to Store",
+      "loading": "Loading payment status..."
     }
   },
   "Toast": {

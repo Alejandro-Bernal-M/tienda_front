@@ -285,6 +285,16 @@
       "failedTitle": "Pago Pendiente o Rechazado",
       "failedMessage": "El estado de tu pago es:",
       "backToStore": "Volver a la Tienda"
+    },
+    "failure": {
+      "title": "Pago no procesado",
+      "message": "No pudimos completar tu pago. Puedes revisar los detalles abajo o intentar nuevamente.",
+      "detailsTitle": "Detalles del error",
+      "statusLabel": "Estado:",
+      "paymentTypeLabel": "Tipo de pago:",
+      "retryButton": "Reintentar pago",
+      "backToStore": "Volver a la tienda",
+      "loading": "Cargando estado del pago..."
     }
   },
   "Toast": {
