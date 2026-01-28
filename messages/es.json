@@ -256,7 +256,8 @@
     "error": "Hubo un error al cargar los productos. Por favor recarga la página.",
     "empty": "No se encontraron productos en esta categoría.",
     "categories": "Categorías",
-    "productsFound": "productos encontrados"
+    "productsFound": "productos encontrados",
+    "viewAll": "Ver todos los productos"
   },
   "ProductCard": {
     "category": "Categoría:",

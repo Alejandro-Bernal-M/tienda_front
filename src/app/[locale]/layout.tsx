@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "../globals.css"; // Ajusta la ruta si moviste el archivo
-import StoreProvider from "@/app/StoreProvider"; // Ajusta rutas si es necesario
 import Navbar from "@/components/navbar/Navbar";
 
 // Importaciones de Next-Intl
 import { NextIntlClientProvider } from 'next-intl';
+import CartPersister from "@/components/CartPersister";
+import StoreProvider from "@/app/StoreProvider";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -51,6 +52,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider>
           <StoreProvider>
+            <CartPersister />
             <div className="flex flex-col min-h-screen">
               <Navbar />
               <main className="flex-grow">

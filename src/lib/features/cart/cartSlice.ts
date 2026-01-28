@@ -110,6 +110,19 @@ export const removeItemFromCartDB = createAsyncThunk(
   }
 );
 
+export const syncGuestCartWithDB = createAsyncThunk(
+  'cart/syncGuestCartWithDB',
+  async (info: { cartItems: ProductCart[], token: string }, { dispatch }) => {
+    await fetch(apiEndPoints.mergeCart, { 
+        method: 'POST',
+        body: JSON.stringify({ items: info.cartItems }),
+        headers: { Authorization: `Bearer ${info.token}`, 'Content-Type': 'application/json' },
+    });
+    
+    return dispatch(getCartItemsDB(info.token)).unwrap();
+  }
+);
+
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
@@ -174,7 +187,17 @@ const cartSlice = createSlice({
     },
     hideCart: state => {
       state.showCart = false;
-    }
+    },
+    setCart: (state, action: PayloadAction<ProductCart[]>) => {
+      state.items = action.payload;
+      state.totalProducts = action.payload.length;
+      state.totalPrices = action.payload.reduce((acc, item) => {
+        const price = item.offer 
+            ? item.price - (item.price * item.offer) / 100 
+            : item.price;
+        return acc + (price * item.quantity);
+      }, 0);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -235,10 +258,19 @@ const cartSlice = createSlice({
       })
       .addCase(removeItemFromCartDB.rejected, (state, action) => {
         console.log('removeItemFromCartDB.rejected', action.error);
+      })
+      .addCase(syncGuestCartWithDB.pending, (state) => {
+        console.log('Sincronizando carritos...');
+      })
+      .addCase(syncGuestCartWithDB.fulfilled, (state, action) => {
+        console.log('F|usión de carritos completada');
+      })
+      .addCase(syncGuestCartWithDB.rejected, (state, action) => {
+        console.error('Falló la fusión de carritos', action.error);
       });
   }
 });
 
-export const { addItem, removeItem, clearCart, displayCart, hideCart, removeItemQuantity } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, displayCart, hideCart, removeItemQuantity, setCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

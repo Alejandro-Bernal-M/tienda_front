@@ -69,17 +69,18 @@ export default function Product(product: ProductType) {
     setButtonText(t('adding'));
 
     
+    const item = {
+      _id: product._id,
+      quantity: productQuantity,
+      price: finalPrice,
+      size: selectedSize,
+      color: selectedColor,
+      offer: product.offer,
+    };
+    
+    dispatch(addItem(item));
     
     if (product._id && token) {
-      const item = {
-        _id: product._id,
-        quantity: productQuantity,
-        price: finalPrice,
-        size: selectedSize,
-        color: selectedColor,
-        offer: product.offer,
-      };
-      dispatch(addItem(item));
       dispatch(addItemToCartDB({ item, token }));
     }
 

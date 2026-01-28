@@ -13,6 +13,7 @@ const apiEndPoints = {
   updateCategory: (id: string) => process.env.NEXT_PUBLIC_API+`/categories/${id}`, // method: PUT
   deleteCategory: (id: string) => process.env.NEXT_PUBLIC_API+`/categories/${id}`, // method: DELETE
   addProductToCart: process.env.NEXT_PUBLIC_API+'/cart/add', // method: POST
+  mergeCart: process.env.NEXT_PUBLIC_API+'/cart/merge', // method: POST
   subtractQuantityFromCart: process.env.NEXT_PUBLIC_API+'/cart/subtract', // method: POST
   removeProductFromCart: (id: string) => process.env.NEXT_PUBLIC_API+`/cart/remove/${id}`, // method: DELETE
   clearCart: process.env.NEXT_PUBLIC_API+'/cart/clear', // method: DELETE

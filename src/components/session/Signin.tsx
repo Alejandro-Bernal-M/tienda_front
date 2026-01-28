@@ -8,6 +8,8 @@ import { useAppDispatch } from "@/lib/hooks";
 import { signIn } from "@/lib/features/user/userSlice";
 import { getCartItemsDB } from "@/lib/features/cart/cartSlice";
 import { Loader2, AlertCircle, ArrowRight } from "lucide-react"; // Iconos
+import { syncGuestCartWithDB } from '@/lib/features/cart/cartSlice';
+import { useAppSelector } from '@/lib/hooks';
 
 export default function Signin() {
   const t = useTranslations('Session.signin');
@@ -17,6 +19,7 @@ export default function Signin() {
   // Estados locales para manejo de UI
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const { items } = useAppSelector((state) => state.cart);
 
   async function handleSignin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -48,7 +51,7 @@ export default function Signin() {
         }
 
         // 3. Sincronizar Carrito de base de datos
-        dispatch(getCartItemsDB(data.token));
+        dispatch(syncGuestCartWithDB({ cartItems: items, token: data.token }));
         
         // 4. Redirigir a productos
         router.push('/products');

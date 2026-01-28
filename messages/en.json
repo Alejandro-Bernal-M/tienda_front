@@ -256,7 +256,8 @@
     "error": "An error occurred while loading products. Please reload the page.",
     "empty": "No products found in this category.",
     "categories": "Categories",
-    "productsFound": "products found"
+    "productsFound": "products found",
+    "viewAll": "View all products"
   },
   "ProductCard": {
     "category": "Category:",
