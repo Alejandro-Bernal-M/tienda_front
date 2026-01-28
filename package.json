@@ -11,10 +11,11 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.3",
     "lucide-react": "^0.556.0",
-    "next": "^14.2.33",
+    "next": "^16.1.6",
     "next-intl": "^4.5.8",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.6.0",
     "react-redux": "^9.1.0"
   },
   "devDependencies": {
@@ -23,7 +24,7 @@
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.22",
     "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.0",
+    "eslint-config-next": "^16.1.6",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
