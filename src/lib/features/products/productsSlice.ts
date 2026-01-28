@@ -2,7 +2,8 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import apiEndPoints from "../../../utils/routes";
 import { signOut } from "../user/userSlice";
 import { ProductType } from "../../types";
-
+import { setGlobalError } from "../ui/uiSlice";
+  
 const initialState = {
   products: [] as ProductType[],
   loading: false,
@@ -68,17 +69,17 @@ const updateProduct = createAsyncThunk(
       if(response.status === 401) {
         dispatch(signOut());
         window.location.href = '/session ';
-        alert('Session expired, please sign in');
+        dispatch(setGlobalError('session_expired'));
         return
       }
 
       if(response.status === 400) {
-        alert('Error updating product');
+        dispatch(setGlobalError('error_updating_product'));
         return
       }
 
       if( response.status === 404) {
-        alert('Product not found')
+        dispatch(setGlobalError('product_id_missing'));
         return
       }
       return response.json();
@@ -103,17 +104,17 @@ const deleteProduct = createAsyncThunk(
       if(response.status === 401) {
         dispatch(signOut());
         window.location.href = '/session ';
-        alert('Session expired, please sign in');
+        dispatch(setGlobalError('session_expired'));
         return
       }
 
       if(response.status === 400) {
-        alert('Error deleting product');
+        dispatch(setGlobalError('error_deleting_product'));
         return
       }
 
       if( response.status === 404) {
-        alert('Product not found')
+        dispatch(setGlobalError('product_not_found'));
         return
       }
       return response.json();

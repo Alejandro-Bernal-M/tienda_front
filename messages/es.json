@@ -286,5 +286,15 @@
       "failedMessage": "El estado de tu pago es:",
       "backToStore": "Volver a la Tienda"
     }
+  },
+  "Toast": {
+    "addedToCart": "Añadido al carrito",
+    "removedFromCart": "Eliminado del carrito",
+    "cartCleared": "Carrito vaciado",
+    "errorOccurred": "Ocurrió un error",
+    "session_expired": "Inicia sesión para continuar",
+    "product_id_missing": "Falta el ID del producto",
+    "error_updating_product": "Error al actualizar el producto",
+    "error_deleting_product": "Error al eliminar el producto"
   }
 }

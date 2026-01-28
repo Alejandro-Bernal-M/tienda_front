@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar/Navbar";
 import { NextIntlClientProvider } from 'next-intl';
 import CartPersister from "@/components/CartPersister";
 import StoreProvider from "@/app/StoreProvider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -57,6 +58,32 @@ export default async function RootLayout({
               <Navbar />
               <main className="flex-grow">
                 {children}
+                <Toaster
+                  position="top-center"
+                  reverseOrder={false}
+                  toastOptions={{
+                    // Personalización para que combine con Mokaze
+                    style: {
+                      background: '#333',
+                      color: '#fff',
+                      fontFamily: 'serif', // Si usas serif en tu marca
+                    },
+                    success: {
+                      duration: 4000,
+                      iconTheme: {
+                        primary: '#10B981', // Emerald green
+                        secondary: '#fff',
+                      },
+                    },
+                    error: {
+                      duration: 5000,
+                      iconTheme: {
+                        primary: '#EF4444', // Red
+                        secondary: '#fff',
+                      },
+                    },
+                  }}
+                />
               </main>
             </div>
           </StoreProvider>

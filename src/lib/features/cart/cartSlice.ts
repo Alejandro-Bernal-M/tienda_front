@@ -2,6 +2,7 @@ import { createSlice, PayloadAction, createAsyncThunk  } from '@reduxjs/toolkit'
 import { CartState, ProductType, ProductCart, RemoveItem } from '../../types';
 import apiEndPoints from '@/utils/routes';
 import { signOut } from '../user/userSlice';
+import { setGlobalError } from '../ui/uiSlice'
 
 const initialState: CartState = {
   items: [],
@@ -55,7 +56,7 @@ export const getCartItemsDB = createAsyncThunk(
       dispatch(clearCart());
       dispatch(signOut());
       window.location.href = '/session ';
-      alert('Session expired, please sign in');
+      dispatch(setGlobalError('session_expired'));
     }
     let data = await response.json();
     console.log('get cart items response', data)
@@ -84,7 +85,7 @@ export const subtractQuantityFromCartDB = createAsyncThunk(
       console.log('expired')
       dispatch(signOut());
       window.location.href = '/session ';
-      alert('Session expired, please sign in');
+      dispatch(setGlobalError('session_expired'));
     }
     return response.json();
   }
@@ -104,7 +105,7 @@ export const removeItemFromCartDB = createAsyncThunk(
       console.log('expired')
       dispatch(signOut());
       window.location.href = '/session ';
-      alert('Session expired, please sign in');
+      dispatch(setGlobalError('session_expired'));
     }
     return response.json();
   }

@@ -10,6 +10,8 @@ import { hideCart, displayCart, getCartItemsDB } from '@/lib/features/cart/cartS
 import { getAllProducts } from '@/lib/features/products/productsSlice';
 import { getHomeSections } from '@/lib/features/homeSection/homeSectionsSlice';
 import CartPopup from '../cart/CartPopup';
+import toast from 'react-hot-toast'
+import { clearGlobalError } from '@/lib/features/ui/uiSlice';
 
 // Definimos las rutas públicas fuera del componente para que no se recreen en cada render
 // Nota: Usamos startsWith para cubrir subrutas (ej: /products/id)
@@ -18,6 +20,7 @@ const EXACT_PUBLIC_ROUTES = ['/'];
 
 export default function Navbar() {
   const t = useTranslations('Navbar');
+  const toastT = useTranslations('Toast');
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const router = useRouter();
@@ -25,12 +28,31 @@ export default function Navbar() {
   // Estados de Redux
   const { user, token } = useAppSelector((state) => state.user);
   const { showCart, items } = useAppSelector((state) => state.cart);
+  const { globalError } = useAppSelector((state) => state.ui);
   
   // Estado local
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   // 🔥 NUEVO: Estado para saber si ya leímos el LocalStorage
   const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    if (globalError) {
+      // Intentamos traducir la clave que viene de Redux (ej: 'session_expired')
+      // Si no existe la traducción, mostramos un fallback
+      const message = toastT.has(globalError) 
+        ? toastT(globalError) 
+        : toastT('generic_error');
+
+      // Lanzar el Toast
+      toast.error(message);
+
+      // 🔥 LIMPIEZA INMEDIATA:
+      // Vital para que el error no se quede "pegado" y vuelva a salir al navegar
+      dispatch(clearGlobalError());
+    }
+  }, [globalError, dispatch, toastT]);
+
 
   // 1. LÓGICA DE HIDRATACIÓN (Carga inicial)
   useEffect(() => {

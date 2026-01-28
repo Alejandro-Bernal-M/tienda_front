@@ -7,9 +7,11 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { clearCart, clearCartDB, hideCart } from "@/lib/features/cart/cartSlice";
 import { ShoppingBag, X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import toast from "react-hot-toast";
 
 export default function CartPopup({ onClose }: { onClose?: () => void }) {
   const t = useTranslations('CartPopup');
+  const toastT = useTranslations('Toast');
   const dispatch = useAppDispatch();
   const popupRef = useRef<HTMLDivElement>(null);
   
@@ -40,13 +42,48 @@ export default function CartPopup({ onClose }: { onClose?: () => void }) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleClearCart() {
-    if (confirm(t('clearCart') + '?')) {
-        if(token) {
-          dispatch(clearCartDB(token));
-        }
-        dispatch(clearCart());
-    }
+    // Usamos toast.custom para crear un diálogo bonito
+    const cartClearedMessage = toastT('cartCleared');
+    toast.custom((toastObj) => (
+      <div className={`${toastObj.visible ? 'animate-enter' : 'animate-leave'} max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5 p-4`}>
+        <div className="flex-1 w-0 p-1">
+          <div className="flex items-start">
+            <div className="ml-3 flex-1">
+              <p className="text-sm font-medium text-gray-900">
+                ¿Estás seguro de vaciar el carrito?
+              </p>
+              <p className="mt-1 text-sm text-gray-500">
+                Esta acción no se puede deshacer.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex border-l border-gray-200 ml-4">
+          <button
+            onClick={() => {
+              // 1. Ejecutar la acción
+              if(token) dispatch(clearCartDB(token));
+              dispatch(clearCart());
+              
+              // 2. Cerrar el toast
+              toast.dismiss(toastObj.id);
+              toast.success(cartClearedMessage);
+            }}
+            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-red-600 hover:text-red-500 focus:outline-none"
+          >
+            Sí, vaciar
+          </button>
+          <button
+            onClick={() => toast.dismiss(toastObj.id)} // Solo cerrar
+            className="w-full border border-transparent rounded-none p-4 flex items-center justify-center text-sm font-medium text-gray-600 hover:text-gray-500 focus:outline-none"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    ), { duration: Infinity }); // Infinity para que no se cierre solo
   }
+    
 
   const formatCurrency = (amount: number) => 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount);

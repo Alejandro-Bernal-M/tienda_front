@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '@/lib/hooks';
 import { addItem, addItemToCartDB } from '@/lib/features/cart/cartSlice';
 import type { ProductType } from '@/lib/types';
 import { ShoppingCart, ChevronLeft, ChevronRight, Minus, Plus, PackageOpen } from 'lucide-react';
+import toast from 'react-hot-toast'
 
 export default function Product(product: ProductType) {
   const t = useTranslations('ProductCard');
@@ -56,12 +57,12 @@ export default function Product(product: ProductType) {
   function handleAddToCart() {
     if (isOutOfStock) return;
     if (!selectedSize || !selectedColor) {
-      alert(t('selectSizeColor'));
+      toast.error(t('selectSizeColor'));
       return;
     }
     
     if (!product._id) {
-      alert('Product ID is missing');
+      toast.error(t('productIdMissing'));
       return;
     }
     

@@ -286,5 +286,15 @@
       "failedMessage": "Your payment status is:",
       "backToStore": "Back to Store"
     }
+  },
+  "Toast": {
+    "addedToCart": "Added to cart",
+    "removedFromCart": "Removed from cart",
+    "cartCleared": "Cart cleared",
+    "errorOccurred": "An error occurred",
+    "session_expired": "Sign in to continue",
+    "product_id_missing": "Product ID missing",
+    "error_updating_product": "Error updating product",
+    "error_deleting_product": "Error deleting product"
   }
 }
