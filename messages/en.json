@@ -255,7 +255,8 @@
     "loading": "Loading catalog...",
     "error": "An error occurred while loading products. Please reload the page.",
     "empty": "No products found in this category.",
-    "categories": "Categories"
+    "categories": "Categories",
+    "productsFound": "products found"
   },
   "ProductCard": {
     "category": "Category:",

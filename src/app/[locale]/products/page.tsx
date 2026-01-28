@@ -25,36 +25,26 @@ export default function Products() {
 
   // --- LÓGICA DE FILTRADO PADRE E HIJOS ---
   const filteredProducts = useMemo(() => {
-    // 1. Si está en 'all', devuelve todo
     if (activeCategoryId === 'all') {
       return products;
     }
 
-    // 2. Buscamos la categoría activa para ver si tiene hijos
     const selectedCategory = categories.find(c => c._id === activeCategoryId);
     
-    // 3. Creamos una lista de IDs permitidos (El ID del padre + los IDs de los hijos)
     const validCategoryIds = new Set<string>();
-    
-    // Agregamos el ID seleccionado (Padre)
     validCategoryIds.add(activeCategoryId);
 
-    // Si tiene hijos, agregamos sus IDs también
     if (selectedCategory && selectedCategory.children) {
         selectedCategory.children.forEach(child => {
             if (child._id) validCategoryIds.add(child._id);
         });
     }
 
-    // 4. Filtramos los productos
     return products.filter((product) => {
-        // Validación de seguridad
         if (!product.category || !product.category._id) return false;
-        
-        // Chequeamos si la categoría del producto está en la lista de permitidos (Padre o Hijos)
         return validCategoryIds.has(product.category._id);
     });
-  }, [activeCategoryId, products, categories]); // Importante: agregar 'categories' a dependencias
+  }, [activeCategoryId, products, categories]);
 
   const handleCategorySelect = (id: string, name: string) => {
     setActiveCategoryId(id);
@@ -73,14 +63,14 @@ export default function Products() {
           {t('title')}
         </h1>
         <p className="text-mokaze-sand/80 uppercase tracking-widest text-xs font-bold">
-           Mokaze Collection
+            {t('subtitleAll')}
         </p>
       </div>
 
       <div className="max-w-7xl mx-auto p-6 md:p-12 flex flex-col md:flex-row gap-10">
         
         {/* --- SIDEBAR --- */}
-        <aside className="w-full md:w-64 flex-shrink-0">
+        <aside className="w-full md:w-64 flex-shrink-0 relative z-30">
           <div className="sticky top-24">
             
             <div className="flex items-center gap-2 mb-6 text-mokaze-primary border-b border-mokaze-primary/10 pb-2">
@@ -121,9 +111,9 @@ export default function Products() {
                             )}
                         </button>
 
-                        {/* Subcategorías con "Puente Invisible" arreglado */}
+                        {/* Subcategorías: Z-INDEX AUMENTADO a z-50 */}
                         {category.children && category.children.length > 0 && (
-                            <div className="hidden md:group-hover:block absolute left-full top-0 pl-2 w-56 z-20">
+                            <div className="hidden md:group-hover:block absolute left-full top-0 pl-2 w-56 z-50">
                                 <div className="bg-white border border-mokaze-primary/10 shadow-xl rounded-sm animate-fade-in p-1">
                                     <ul className="py-1">
                                         {category.children.map((child) => (
@@ -154,7 +144,8 @@ export default function Products() {
         </aside>
 
         {/* --- MAIN GRID --- */}
-        <main className="flex-grow">
+        {/* Z-INDEX BAJO: z-0 para asegurar que quede debajo del sidebar */}
+        <main className="flex-grow relative z-0">
             
             <div className="mb-8 border-b border-mokaze-primary/10 pb-4">
                 <h2 className="text-2xl font-serif text-mokaze-primary">
@@ -168,7 +159,7 @@ export default function Products() {
                     }
                 </h2>
                 <p className="text-xs text-mokaze-dark/40 mt-1 uppercase tracking-widest">
-                    {filteredProducts.length} Productos encontrados
+                    {filteredProducts.length} {t('productsFound')}
                 </p>
             </div>
 
@@ -202,7 +193,7 @@ export default function Products() {
                             onClick={() => handleCategorySelect('all', t('allProducts'))}
                             className="mt-4 text-xs font-bold uppercase tracking-widest text-mokaze-accent hover:text-mokaze-primary border-b border-mokaze-accent hover:border-mokaze-primary transition-colors pb-0.5"
                         >
-                            Ver todos los productos
+                            {t('viewAll')}
                         </button>
                     </div>
                 )
