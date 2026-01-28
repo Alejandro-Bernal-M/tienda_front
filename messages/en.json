@@ -184,7 +184,7 @@
       "sizesHint": "Enter sizes separated by commas (e.g., S, M, L, XL)",
       "colorsHint": "Enter colors separated by commas (e.g., Red, Blue, Green)"
     },
-    "orders": {
+    "Orders": {
       "title": "Order Management",
       "subtitle": "Manage and track customer orders",
       "headers": {
@@ -204,9 +204,66 @@
       "processing": "Processing",
       "shipped": "Shipped",
       "delivered": "Delivered",
-      "cancelled": "Cancelled"
+      "cancelled": "Cancelled",
+      "payment": {
+        "pending": "Pending",
+        "approved": "Approved (MercadoPago)",
+        "paid": "Paid",
+        "rejected": "Rejected",
+        "refunded": "Refunded"
+      }
       },
-      "empty": "No orders found."
+      "empty": "No orders found.",
+      "common": {
+      "invalidDate": "Invalid date"
+      },
+      "toasts": {
+      "loadError": "Could not load the order",
+      "updating": "Updating order...",
+      "updateSuccess": "Order updated successfully",
+      "updateError": "Error updating the order"
+      },
+      "notFound": {
+      "title": "Order not found",
+      "backButton": "Back to list"
+      },
+      "header": {
+      "backToOrders": "Back to Orders",
+      "orderTitle": "Order",
+      "saving": "Saving...",
+      "saveChanges": "Save Changes"
+      },
+      "sections": {
+      "products": {
+        "title": "Products",
+        "defaultAlt": "Product",
+        "unavailable": "Product unavailable",
+        "size": "Size",
+        "color": "Color",
+        "totalOrder": "Total Order"
+      },
+      "shipping": {
+        "title": "Shipping Information",
+        "contact": "Contact",
+        "address": "Address"
+      },
+      "management": {
+        "title": "Order Management",
+        "orderStatusLabel": "Order Status",
+        "paymentStatusLabel": "Payment Status"
+      },
+      "payment": {
+        "title": "Payment Details",
+        "method": "Method",
+        "transactionId": "Transaction ID",
+        "mpStatus": "MP Status"
+      },
+      "user": {
+        "registeredTitle": "Registered User",
+        "guestTitle": "User",
+        "guestLabel": "Purchased as a guest"
+      }
+      }
     }
   },
   "CartPopup": {

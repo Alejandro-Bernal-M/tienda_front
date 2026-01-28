@@ -22,7 +22,8 @@ const apiEndPoints = {
   saveCart: process.env.NEXT_PUBLIC_API+'/cart/save', // method: POST
   checkoutSession: process.env.NEXT_PUBLIC_API+'/stripe/create-session', // method: POST
   getOrders: process.env.NEXT_PUBLIC_API+'/orders', // method: GET
-  updateOrderStatus: (id: string) =>  process.env.NEXT_PUBLIC_API+`/order/${id}`, // method: PUT
+  getOrder: (id: string) => process.env.NEXT_PUBLIC_API+`/order/${id}`, // method: GET
+  updateOrder: (id: string) =>  process.env.NEXT_PUBLIC_API+`/order/${id}`, // method: PUT
   createHomeSection: process.env.NEXT_PUBLIC_API+'/homeSection/create', // method: POST
   getHomeSections: process.env.NEXT_PUBLIC_API+'/homeSections', // method: GET
   updateHomeSection: (id: string) => process.env.NEXT_PUBLIC_API+`/homeSection/update/${id}`, // method: PUT

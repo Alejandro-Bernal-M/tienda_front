@@ -184,7 +184,7 @@
       "sizesHint": "Ingresa las tallas separadas por comas (p.ej., S, M, L, XL)",
       "colorsHint": "Ingresa los colores separados por comas (p.ej., Rojo, Azul, Verde)"
     },
-    "orders": {
+    "Orders": {
       "title": "Gestión de Pedidos",
       "subtitle": "Administra y rastrea las órdenes de los clientes",
       "headers": {
@@ -204,9 +204,66 @@
         "processing": "Procesando",
         "shipped": "Enviado",
         "delivered": "Entregado",
-        "cancelled": "Cancelado"
+        "cancelled": "Cancelado",
+        "payment": {
+          "pending": "Pendiente",
+          "approved": "Aprobado (MercadoPago)",
+          "paid": "Pagado",
+          "rejected": "Rechazado",
+          "refunded": "Reembolsado"
+        }
       },
-      "empty": "No se encontraron pedidos."
+      "empty": "No se encontraron pedidos.",
+      "common": {
+        "invalidDate": "Fecha inválida"
+      },
+      "toasts": {
+        "loadError": "No se pudo cargar la orden",
+        "updating": "Actualizando orden...",
+        "updateSuccess": "Orden actualizada correctamente",
+        "updateError": "Error al actualizar la orden"
+      },
+      "notFound": {
+        "title": "Orden no encontrada",
+        "backButton": "Volver al listado"
+      },
+      "header": {
+        "backToOrders": "Volver a Órdenes",
+        "orderTitle": "Orden",
+        "saving": "Guardando...",
+        "saveChanges": "Guardar Cambios"
+      },
+      "sections": {
+        "products": {
+          "title": "Productos",
+          "defaultAlt": "Producto",
+          "unavailable": "Producto no disponible",
+          "size": "Talla",
+          "color": "Color",
+          "totalOrder": "Total Orden"
+        },
+        "shipping": {
+          "title": "Información de Envío",
+          "contact": "Contacto",
+          "address": "Dirección"
+        },
+        "management": {
+          "title": "Gestión de Orden",
+          "orderStatusLabel": "Estado del Pedido",
+          "paymentStatusLabel": "Estado del Pago"
+        },
+        "payment": {
+          "title": "Detalles de Pago",
+          "method": "Método",
+          "transactionId": "ID Transacción",
+          "mpStatus": "Estado MP"
+        },
+        "user": {
+          "registeredTitle": "Usuario Registrado",
+          "guestTitle": "Usuario",
+          "guestLabel": "Compra realizada como invitado"
+        }
+      }
     }
   },
   "CartPopup": {

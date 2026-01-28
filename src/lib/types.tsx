@@ -50,7 +50,7 @@ interface RemoveItem {
   quantity: number;
 }
 
-type orderProduct = {
+type OrderProduct = {
   product: string;
   quantity: number;
 }
@@ -69,7 +69,7 @@ interface Order {
   email: string;
   name: string;
   totalAmount: number;
-  products: orderProduct[];
+  products: OrderProduct[];
   paymentStatus: string;
   paymentType: string;
   orderStatus: ['Order Placed', 'Order Accepted', 'Order Processing', 'Order Shipped', 'Order Delivered', 'Order Cancelled'];
@@ -91,4 +91,4 @@ interface HomeSection {
 
 
 
-export type { Product as ProductType, Category, CartState, ProductCart, RemoveItem, Order, HomeSection };
+export type { Product as ProductType, Category, CartState, ProductCart, RemoveItem, Order, HomeSection, OrderProduct };

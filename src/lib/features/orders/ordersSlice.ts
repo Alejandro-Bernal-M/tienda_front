@@ -35,32 +35,44 @@ const getOrders = createAsyncThunk(
   }
 );
 
-const updateOrderStatus = createAsyncThunk(
-  "orders/updateOrderStatus",
-  async (data: any, { dispatch }) => {
-    const { orderId, orderStatus, token } = data;
+const updateOrder = createAsyncThunk(
+  "orders/updateOrder",
+  async (data: { orderId: string, orderStatus: string, paymentStatus?: string, token: string }, { dispatch, rejectWithValue }) => {
+    
+    // Destructuramos también paymentStatus
+    const { orderId, orderStatus, paymentStatus, token } = data;
+
     try {
-      const response = await fetch(apiEndPoints.updateOrderStatus(orderId), {
+      const response = await fetch(apiEndPoints.updateOrder(orderId), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json; charset=utf-8',
-          'Authorization': 'Bearer '+token
+          'Authorization': 'Bearer ' + token
         },
-        body: JSON.stringify({ orderStatus })
+        body: JSON.stringify({ 
+            orderStatus, 
+            paymentStatus
+        })
       });
-      if(response.status === 401){
-        console.log('Please sign in to update order status')
+
+      if (response.status === 401) {
         dispatch(signOut());
         window.location.href = '/';
-        return
+        return rejectWithValue('Unauthorized');
       }
-      if(response.status === 200){
-        return response.json();
+
+      if (!response.ok) {
+        throw new Error('Error en la petición');
       }
+
+      return await response.json();
+
     } catch (error) {
       console.error(error);
+      return rejectWithValue(error);
     }
-  });
+  }
+);
 
 const ordersSlice = createSlice({
   initialState,
@@ -78,10 +90,10 @@ const ordersSlice = createSlice({
       state.loadingOrders = false;
       state.error = action.error;
     });
-    builder.addCase(updateOrderStatus.pending, (state) => {
+    builder.addCase(updateOrder.pending, (state) => {
       state.loadingOrders = true;
     });
-    builder.addCase(updateOrderStatus.fulfilled, (state, action) => {
+    builder.addCase(updateOrder.fulfilled, (state, action) => {
       state.loadingOrders = false;
       state.orders = state.orders.map((order) => {
         if(order._id === action.payload.updatedOrder._id){
@@ -90,7 +102,7 @@ const ordersSlice = createSlice({
         return order;
       });
     });
-    builder.addCase(updateOrderStatus.rejected, (state, action) => {
+    builder.addCase(updateOrder.rejected, (state, action) => {
       state.loadingOrders = false;
       state.error = action.error;
     });
@@ -98,4 +110,4 @@ const ordersSlice = createSlice({
 })
 
 export default ordersSlice.reducer;
-export { getOrders, updateOrderStatus };
+export { getOrders, updateOrder };

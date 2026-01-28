@@ -3,17 +3,19 @@
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
-import { updateOrderStatus, getOrders } from "@/lib/features/orders/ordersSlice";
+import { updateOrder, getOrders } from "@/lib/features/orders/ordersSlice";
 import { getAllProducts } from '@/lib/features/products/productsSlice';
+import { useRouter } from 'next/navigation';
 
 import { 
   Edit2, Check, X, MapPin, CreditCard, 
-  Calendar, Package, User, Loader2, Search 
+  Calendar, Package, User, Loader2, Search , Eye
 } from 'lucide-react';
 
 export default function OrdersPage() {
-  const t = useTranslations('Admin.orders');
+  const t = useTranslations('Admin.Orders');
   const dispatch = useAppDispatch();
+  const router = useRouter();
   
   const { orders, loadingOrders } = useAppSelector((state) => state.orders);
   const { products } = useAppSelector((state) => state.products);
@@ -44,7 +46,7 @@ export default function OrdersPage() {
 
   const saveStatus = (orderId: string) => {
     if (orderId && tempStatus) {
-      dispatch(updateOrderStatus({ orderId, orderStatus: tempStatus, token }));
+      dispatch(updateOrder({ orderId, orderStatus: tempStatus, token }));
       setEditingOrderId(null);
     }
   };
@@ -69,6 +71,10 @@ export default function OrdersPage() {
     order._id.toLowerCase().includes(searchTerm.toLowerCase()) ||
     order.email.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const handleViewDetails = (orderId: string) => {
+    router.push(`/admin/orders/${orderId}`);
+  };
 
   return (
     <div className="min-h-screen bg-mokaze-base p-6 md:p-12 animate-fade-in">
@@ -222,6 +228,13 @@ export default function OrdersPage() {
                              <Edit2 className="w-4 h-4" />
                           </button>
                        )}
+                     <button 
+                        onClick={() => handleViewDetails(order._id)}
+                        className="p-2 text-mokaze-dark/40 hover:text-mokaze-accent hover:bg-mokaze-sand/20 rounded-full transition-colors ml-1"
+                        title="Ver detalles"
+                     >
+                        <Eye className="w-4 h-4" />
+                     </button>
                     </td>
 
                   </tr>
