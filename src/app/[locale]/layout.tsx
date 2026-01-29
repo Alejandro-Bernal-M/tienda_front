@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import "../globals.css"; // Ajusta la ruta si moviste el archivo
+import "../globals.css";
 import Navbar from "@/components/navbar/Navbar";
 
-// Importaciones de Next-Intl
+import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
+
 import CartPersister from "@/components/CartPersister";
 import StoreProvider from "@/app/StoreProvider";
 import { Toaster } from "react-hot-toast";
@@ -23,19 +24,18 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Mokaze | Nature & Balance",
-  description: "Equipamiento de aventura con alma zen.",
+  description: "Ropa con espiritu del bosque",
 };
 
-// Definimos los props incluyendo los params de locale
-export default async function RootLayout({
-  children,
-  params: { locale }
-}: Readonly<{
+interface LocaleLayoutProps {
   children: React.ReactNode;
-  params: { locale: string };
-}>) {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function RootLayout({ children, params }: LocaleLayoutProps) {
+  const { locale } = await params;
   
-  // Obtenemos los mensajes del servidor para pasarlos al cliente
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>
@@ -51,7 +51,7 @@ export default async function RootLayout({
           selection:text-white
         `}
       >
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages} locale={locale}>
           <StoreProvider>
             <CartPersister />
             <div className="flex flex-col min-h-screen">
@@ -62,23 +62,22 @@ export default async function RootLayout({
                   position="top-center"
                   reverseOrder={false}
                   toastOptions={{
-                    // Personalización para que combine con Mokaze
                     style: {
                       background: '#333',
                       color: '#fff',
-                      fontFamily: 'serif', // Si usas serif en tu marca
+                      fontFamily: 'serif',
                     },
                     success: {
                       duration: 4000,
                       iconTheme: {
-                        primary: '#10B981', // Emerald green
+                        primary: '#10B981',
                         secondary: '#fff',
                       },
                     },
                     error: {
                       duration: 5000,
                       iconTheme: {
-                        primary: '#EF4444', // Red
+                        primary: '#EF4444',
                         secondary: '#fff',
                       },
                     },
