@@ -33,6 +33,11 @@ const nextConfig = {
         protocol: 'http',
         hostname: 'localhost',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'mokaze.com',
+        pathname: '/uploads/**',
       }
     ],
   },
