@@ -273,7 +273,9 @@
     "subtotal": "Subtotal",
     "viewCart": "View Full Cart",
     "clearCart": "Clear Cart",
-    "items": "items"
+    "items": "items",
+    "confirmClear": "Are you sure you want to clear the cart?",
+    "irreversibleAction": "This action cannot be undone."
   },
   "Cart": {
     "title": "Your Cart",

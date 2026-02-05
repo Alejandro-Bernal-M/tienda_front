@@ -273,7 +273,9 @@
     "subtotal": "Subtotal",
     "viewCart": "Ver Carrito Completo",
     "clearCart": "Vaciar Carrito",
-    "items": "artículos"
+    "items": "artículos",
+    "confirmClear": "¿Estás seguro de vaciar el carrito?",
+    "irreversibleAction": "Esta acción no se puede deshacer."
   },
   "Cart": {
     "title": "Tu Carrito",
