@@ -209,11 +209,11 @@ export default function Navbar() {
             <div className="md:hidden flex items-center gap-4">
               <button 
                   onClick={() => showCart ? dispatch(hideCart()) : dispatch(displayCart())}
-                  className="text-mokaze-dark/70"
+                  className="text-mokaze-dark/70 flex items-center gap-0 p-1"
                 >
-                  <ShoppingBag className="w-5 h-5" />
+                  <ShoppingBag className="w-6 h-6 -mr-2" /> 
                   {items.length > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-mokaze-accent text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
+                    <span className="bg-mokaze-accent text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold shadow-sm">
                       {items.length}
                     </span>
                   )}
@@ -254,7 +254,7 @@ export default function Navbar() {
           </div>
         )}
 
-        {showCart && isMobileMenuOpen && (
+        {showCart && (
            <div className="absolute top-full w-full z-50 md:hidden">
              <CartPopup onClose={() => closeCart()} />
            </div>

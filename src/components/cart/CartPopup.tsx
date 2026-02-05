@@ -9,6 +9,10 @@ import { ShoppingBag, X } from "lucide-react";
 import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 
+const isMobile =
+  typeof window !== 'undefined' &&
+  window.matchMedia('(max-width: 768px)').matches;
+
 export default function CartPopup({ onClose }: { onClose?: () => void }) {
   const t = useTranslations('CartPopup');
   const toastT = useTranslations('Toast');
@@ -19,11 +23,7 @@ export default function CartPopup({ onClose }: { onClose?: () => void }) {
   const { products } = useAppSelector((state) => state.products);
   const { items, totalPrices, totalProducts } = useAppSelector((state) => state.cart);
 
-  console.log(products)
-  console.log('Cart Items:', items);
 
-  // Asegúrate de que esta variable de entorno esté definida en tu .env.local
-  // Ejemplo: NEXT_PUBLIC_IMAGES=http://localhost:4000/public/images/
   const imageBaseUrl = process.env.NEXT_PUBLIC_IMAGES || '';
 
   const handleClose = () => {
@@ -32,6 +32,7 @@ export default function CartPopup({ onClose }: { onClose?: () => void }) {
   };
 
   useEffect(() => {
+    if (isMobile) return; 
     function handleClickOutside(event: MouseEvent) {
       if (popupRef.current && !popupRef.current.contains(event.target as Node)) {
         handleClose();
@@ -91,7 +92,7 @@ export default function CartPopup({ onClose }: { onClose?: () => void }) {
   return (
     <div 
       ref={popupRef}
-      className="absolute top-full right-0 mt-2 w-80 md:w-96 bg-white border border-mokaze-primary/10 shadow-2xl rounded-sm overflow-hidden z-50 animate-fade-in origin-top-right"
+      className="md:absolute top-full right-0 mt-2 w-full md:w-80 md:w-96 bg-white border border-mokaze-primary/10 shadow-2xl rounded-sm overflow-hidden z-50 animate-fade-in origin-top-right"
     >
       
       {/* --- HEADER --- */}
